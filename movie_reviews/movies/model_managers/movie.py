@@ -32,12 +32,10 @@ class MovieManager:
     def update_objects(update_data_list):
 
         print("Update object function called")
-        # print(f"Object: {obj}")
         print(f"Update Data: {update_data_list}")
         create_data_list = []
         try:
             for obj in update_data_list:
-                print(f"OBJ: {obj}")
                 updated = Movie.objects.filter(title=obj.title).update(
                     rating=obj.rating,
                     running_time=obj.running_time,
@@ -45,11 +43,9 @@ class MovieManager:
                     description=obj.description,
                     release_date=obj.release_date,
                 )
-                print(f"Updated: {updated}")
                 if not updated:
                     create_data_list.append(obj)
 
-            print(f"For loop exited: {create_data_list}")
             return create_data_list
         except Exception as e:
             print(f"Error while updating: {e}")

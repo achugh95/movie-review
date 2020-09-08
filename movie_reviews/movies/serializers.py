@@ -49,9 +49,7 @@ class MovieSerializer(serializers.ModelSerializer):
 
             subtext = soup1.find("div", attrs={"class": "subtext"})
             try:
-                # print(subtext)
                 subtext = " ".join(subtext.text.split())
-                # print(subtext)
                 subtext = subtext.split("|")
                 if len(subtext) > 3:
                     running_time = subtext[1]
@@ -93,9 +91,9 @@ class MovieSerializer(serializers.ModelSerializer):
                     release_date=release_date,
                 )
             )
-            count += 1
-            if count > 1000:
-                break
+            # count += 1
+            # if count > 1000:
+            #     break
 
         response = MovieManager.update_objects(movie_objects)
         print(f"Response from update serilalizer: {response}")

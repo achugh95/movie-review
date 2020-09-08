@@ -19,19 +19,6 @@ class SignupSerializer(serializers.ModelSerializer):
         fields = ("id", "username", "password", "token", "password")
         read_only_fields = ("id",)
 
-    # def create_user(self, validated_data):
-
-    #     username = validated_data.get("username")
-    #     password = validated_data.get("password")
-    #     try:
-    #         User.objects.create_user(username=username, password=password)
-
-    #         return 0
-    #     except Exception as e:
-    #         # log exception
-    #         print(f"Error while creating the user : {e}")
-    #         return 1
-
     def validate(self, data):
         """
         override user serializer to hash passwoed before saving user
@@ -58,7 +45,6 @@ class UserMovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserMovie
         fields = "__all__"
-        # kwargs = {"user": {"required": True}, "movie": {"required": True}}
 
     def get_unique_together_validators(self):
         """
