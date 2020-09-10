@@ -4,6 +4,19 @@ from movie_reviews.config import CONFIG
 
 
 class MovieManager:
+    
+    @staticmethod
+    def fetch_all_titles():
+        
+        print("Fetch all titles function called")
+        try:
+            title_list = Movie.objects.values_list('title', flat=True)
+            return title_list
+        except Exception as e:
+            print(f"Error: {e}")
+            return CONFIG.DB.FAILURE
+
+
     @staticmethod
     def create_object(create_data):
 
@@ -33,7 +46,7 @@ class MovieManager:
 
         print("Update object function called")
         print(f"Update Data: {update_data_list}")
-        create_data_list = []
+
         try:
             for obj in update_data_list:
                 updated = Movie.objects.filter(title=obj.title).update(
@@ -43,10 +56,7 @@ class MovieManager:
                     description=obj.description,
                     release_date=obj.release_date,
                 )
-                if not updated:
-                    create_data_list.append(obj)
-
-            return create_data_list
+            return CONFIG.GENERIC.SUCCESS
         except Exception as e:
             print(f"Error while updating: {e}")
             return CONFIG.DB.FAILURE

@@ -92,18 +92,32 @@ class MovieSerializer(serializers.ModelSerializer):
                 )
             )
             # count += 1
-            # if count > 1000:
+            # if count > 10:
             #     break
 
-        # TODO: Fetch all movie titles in a single query and only update the ones which exist.
-        # Can use Redis if the data size is high.
-        
-        response = MovieManager.update_objects(movie_objects)
+        # Can use Redis if the data size is high
+        existing_titles = MovieManager.fetch_all_titles()
+        existing_titles_dict = dict()
+        for title in existing_titles:
+            existing_titles_dict[title] = True  # Can even further optimize by mapping all the details 
+                                                # and matching their values to decide the update call 
+                                                # but will be costly as data grows
+
+        update_object_list = []
+        create_object_list = []
+        for movie_object in movie_objects:
+            if existing_titles_dict.get(movie_object.title):
+                update_object_list.append(movie_object)
+            else:
+                create_object_list.append(movie_object)
+
+        response = MovieManager.update_objects(update_object_list)
         print(f"Response from update serilalizer: {response}")
-        if response == CONFIG.GENERIC.FAILURE:
-            return response
-        if response:
-            response = MovieManager.bulk_create(response)
+
+        if response == CONFIG.GENERIC.SUCCESS:
+            response = MovieManager.bulk_create(create_object_list)
+            print(f"Response from update serilalizer: {response}")
+    
         return response
 
 
