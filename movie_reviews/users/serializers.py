@@ -21,7 +21,7 @@ class SignupSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """
-        override user serializer to hash passwoed before saving user
+        override user serializer to hash password before saving user
         """
         if self.instance:
             return super(SignupSerializer, self).validate(data)
