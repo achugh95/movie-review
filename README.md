@@ -19,39 +19,44 @@ python3.7 or higher
 
 
 # Development setup (for Ubuntu):
-# Open Terminal :
+
+## Open Terminal :
 
 Ctrl + Alt + T
 
-sudo apt-get install python-pip
+`sudo apt-get install python-pip`
 
-# Clone Project to your directory
-git clone https://github.com/achugh95/movie-review.git
+## Clone Project to your directory
 
-cd movie-review
+`git clone https://github.com/achugh95/movie-review.git`
 
-# Check python version on your development system
-python --version or python3 --version
+`cd movie-review`
+
+## Check python version on your development system
+
+`python --version or python3 --version`
 
 
 # Setup environment:
-# create an environment 
-python3 -m venv <path>
 
-# Activate virtual environment: 
-source <path_to_virtual_environment>/bin/activate
+## Create an environment 
+`python3 -m venv <path>`
 
-# Install requirements. Use the package manager pip to install the dependencies. 
-pip install -r requirements.txt
+## Activate virtual environment: 
+`source <path_to_virtual_environment>/bin/activate`
+
+## Install requirements. Use the package manager(pip) to install the dependencies. 
+`pip install -r requirements.txt`
 
 
-# Run migrations
+## Run migrations
 
-python manage.py makemigrations
+`python manage.py makemigrations`
 
-python manage.py migrate
+`python manage.py migrate`
 
-# Run Project
+## Run Project
+
 Open terminal and run the following commands:
 
-python3 manage.py runserver
+`python3 manage.py runserver`
